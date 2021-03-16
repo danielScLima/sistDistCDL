@@ -16,6 +16,18 @@ int soma(int mat[][NCOLS], int id)
 	return s;
 }
 
+int obtemMaiorNumero(int mat[][NCOLS], int id)
+{
+	int maiorPos = 0;
+	int i;
+	for(i=1;i<NCOLS;++i)
+	{	
+		if (mat[id][i] > mat[id][maiorPos])
+			maiorPos = i;
+	}
+	return mat[id][maiorPos];
+}
+
 int main (int argc, char *argv[]) 
 {
 	int nthreads, tid;
@@ -39,8 +51,11 @@ int main (int argc, char *argv[])
 	  	}
 	  	else
 	  	{
-	  		int ret = soma(mat, tid-1);
-	  		printf("Soma na thread %d: %d\n", tid, ret);
+	  		//int ret = soma(mat, tid-1);
+	  		//printf("Soma na thread %d: %d\n", tid, ret);
+	  		
+	  		int ret = obtemMaiorNumero(mat, tid-1);
+	  		printf("O maior numero na thread %d: %d\n", tid, ret);
 	  	}
 	  	
 	} // All threads join master thread and disband
